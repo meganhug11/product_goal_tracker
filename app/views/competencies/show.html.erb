@@ -60,9 +60,9 @@
                           <td><%= notes.created_at.strftime('%b %d, %Y') %></td>
                           <td><%= notes.note %></td>
                           <td>
-                            <a href="/goal_notes/<%= notes.id %>/edit" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                            <a href="/competency_notes/<%= notes.id %>/edit" class="btn btn-warning"><i class="fa fa-edit"></i></a>
                           <td>
-                            <a href="/delete_goal/<%= notes.id %>" class="btn btn-danger" rel="nofollow"><i class="fa fa-trash-o"></i></a>
+                            <a href="/delete_competency/<%= notes.id %>" class="btn btn-danger" rel="nofollow"><i class="fa fa-trash-o"></i></a>
                           </td>
                         </tr>
                         <% end %>
