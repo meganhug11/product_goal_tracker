@@ -1,0 +1,61 @@
+<!-- Validation failure messages -->
+
+<% if @competency.errors.any? %>
+  <% @competency.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<!-- Responsive panel example -->
+
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Edit Competency #<%= @competency.id %></h3>
+      </div>
+      <div class="panel-body">
+        <form action="/update_competency/<%= @competency.id %>" method="post" class="form-horizontal">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+          <!-- Label and input for comp_name -->
+          <div class="form-group">
+            <label for="comp_name" class="col-sm-2 control-label">
+              Competency name
+            </label>
+            <div class="col-sm-10">
+              <input type="text" id="comp_name" name="comp_name" placeholder="Competency name" class="form-control" value="<%= @competency.comp_name %>">
+            </div>
+          </div>
+
+          <!-- Label and input for comp_description -->
+          <div class="form-group">
+            <label for="comp_description" class="col-sm-2 control-label">
+              Competency description
+            </label>
+            <div class="col-sm-10">
+              <textarea id="comp_description" name="comp_description" placeholder="Competency description" class="form-control" rows="3"><%= @competency.comp_description %></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button class="btn btn-warning">
+                Update Competency
+              </button>
+              or
+              <a href="/competencies/<%= @competency.id %>">Cancel</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- End responsive panel example -->

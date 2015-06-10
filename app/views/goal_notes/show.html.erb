@@ -1,0 +1,46 @@
+<!-- Responsive panel example-->
+
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Goal Note #<%= @goal_note.id %></h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <dl class="dl-horizontal">
+              <dt>Employee</dt>
+              <dd><%= @goal_note.employee.employee_name %></dd>
+
+              <dt>Goal</dt>
+              <dd><%= @goal_note.goal.goal_name %></dd>
+
+              <dt>Note</dt>
+              <dd><%= @goal_note.note %></dd>
+
+              <dt>Timestamp</dt>
+              <dd><%= @goal_note.created_at.strftime('%b %d, %Y') %></dd>
+
+            </dl>
+            <div class="btn-group btn-group-justified">
+              <a href="/goal_notes" class="btn btn-primary">
+                <i class="fa fa-chevron-left"></i>
+              </a>
+
+              <a href="/goal_notes/<%= @goal_note.id %>/edit" class="btn btn-warning">
+                <i class="fa fa-edit"></i>
+              </a>
+
+              <a href="/delete_goal_note/<%= @goal_note.id %>" class="btn btn-danger" rel="nofollow">
+                <i class="fa fa-trash-o"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- End responsive panel example -->

@@ -1,0 +1,63 @@
+<!-- Validation failure messages -->
+
+<% if @goal.errors.any? %>
+  <% @goal.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<!-- Responsive panel example -->
+
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Add Goal</h3>
+      </div>
+      <div class="panel-body">
+        <form action="/create_goal" method="post" class="form-horizontal">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+          <!-- Label and input for employee_id -->
+          <input name="employee_id" type="hidden" value="<%= current_employee.id %>">
+
+          <!-- Label and input for goal_name -->
+          <div class="form-group">
+            <label for="goal_name" class="col-sm-2 control-label">
+              Goal name
+            </label>
+            <div class="col-sm-10">
+              <input type="text" id="goal_name" name="goal_name" placeholder="Goal name" class="form-control" value="<%= @goal.goal_name %>">
+            </div>
+          </div>
+
+          <!-- Label and input for goal_description -->
+          <div class="form-group">
+            <label for="goal_description" class="col-sm-2 control-label">
+              Goal description
+            </label>
+            <div class="col-sm-10">
+              <textarea id="goal_description" name="goal_description" placeholder="Goal description" class="form-control" rows="3"><%= @goal.goal_description %></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button class="btn btn-success">
+                Create Goal
+              </button>
+              or
+              <a href="/goals">Cancel</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- End responsive panel example -->

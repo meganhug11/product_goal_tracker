@@ -1,0 +1,107 @@
+<div class="page-header">
+  <h1>
+    Competency: <%= @competency.comp_name %>
+  </h1>
+</div>
+
+<div class="row">
+  <div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-9">
+            <dl class="dl-horizontal">
+              <dt>Competency description</dt>
+              <dd><%= @competency.comp_description %></dd>
+            </dl>
+            </div>
+            <div class="btn-group-vertical" class="col-md-3">
+              <a href="/competencies" class="btn btn-primary">
+                <i class="fa fa-chevron-left"> View All Competencies</i>
+              </a>
+              </a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <!-- Validation failure messages -->
+      <% @competency_note = CompetencyNote.new %>
+
+      <% if @competency_note.errors.any? %>
+        <% @competency_note.errors.full_messages.each do |message| %>
+          <div class="alert alert-dismissable alert-danger">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <%= message %>
+          </div>
+        <% end %>
+      <% end %>
+
+        <div>
+          <div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Competency Notes</h3>
+              </div>
+                <div>
+                    <table class="table table-striped table-hover ">
+                      <thead>
+                        <tr>
+                          <th>Submitted</th>
+                          <th>Competency Note</th>
+                          <th>Edit Note</th>
+                          <th>Delete Note</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <% @competency.competency_notes.each do |notes| %>
+                        <tr>
+                          <td><%= notes.created_at.strftime('%b %d, %Y') %></td>
+                          <td><%= notes.note %></td>
+                          <td>
+                            <a href="/goal_notes/<%= notes.id %>/edit" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                          <td>
+                            <a href="/delete_goal/<%= notes.id %>" class="btn btn-danger" rel="nofollow"><i class="fa fa-trash-o"></i></a>
+                          </td>
+                        </tr>
+                        <% end %>
+                      </tbody>
+                    </table>
+                </div>
+
+              <div class="panel-body">
+                <form action="/create_competency_note" method="post" class="form-horizontal">
+                  <!-- Hidden input for authenticity token to protect from forgery -->
+                  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+                  <!-- Label and input for employee_id -->
+                  <input name="employee_id" type="hidden" value="<%= current_employee.id %>">
+
+                <!-- Label and input for competency_id -->
+                <input name="competency_id" type="hidden" value="<%= @competency.id %>">
+
+                <!-- Label and input for note -->
+                <div class="form-group">
+                  <label for="note" class="col-sm-2 control-label">
+                    Note
+                  </label>
+                  <div class="col-sm-10">
+                    <textarea id="note" name="note" placeholder="Note" class="form-control" rows="3"><%= @competency_note.note %></textarea>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-success">
+                      Create Competency Note
+                    </button>
+                    or
+                    <a href="/competencies">Cancel</a>
+                  </div>
+                </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
