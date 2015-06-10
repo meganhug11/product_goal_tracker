@@ -6,4 +6,29 @@
   </div>
 </div>
 
-<div class="container">
+<div class="col-md-4">
+  <h2>Goals <small><a href="/goals">View All</a></small></h2>
+    <ul class="list-group">
+      <% @goals.each do |goal| %>
+        <li class="list-group-item"><a href="/goals/<%= goal.id %>"><%= goal.goal_name %></a></li>
+        <% end %>
+    </ul>
+</div>
+
+<div class="col-md-4">
+  <h2>Competencies <small><a href="/competencies">View All</a></small></h2>
+    <ul class="list-group">
+    <% @competencies.each do |competency| %>
+          <li class="list-group-item"><a href="/competencies/<%= competency.id %>"><%= competency.comp_name %></a></li>
+        <% end %>
+    </ul>
+</div>
+
+<div class="col-md-4">
+  <h2>Meeting Notes <small><a href="/meeting_notes">View All</a></small></h2>
+    <ul class="list-group">
+      <% @meeting_notes.each do |note| %>
+        <li class="list-group-item"><a href="/meeting_notes/<%= note.id %>"><%= note.created_at.strftime('%b %d, %Y') %></a></li>
+        <% end %>
+    </ul>
+</div>
